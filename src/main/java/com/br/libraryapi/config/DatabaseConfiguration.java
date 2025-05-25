@@ -12,7 +12,7 @@ import javax.sql.DataSource;
 @Configuration
 public class DatabaseConfiguration {
 
-    //passando as propriedades
+    // passando as propriedades
     @Value("${spring.datasource.url}")
     String url;
 
@@ -25,7 +25,7 @@ public class DatabaseConfiguration {
     @Value("${spring.datasource.driver-class-name}")
     String driver;
 
-    //@Bean
+    // @Bean
     public DataSource dataSource() {
         DriverManagerDataSource ds = new DriverManagerDataSource();
 
@@ -36,7 +36,7 @@ public class DatabaseConfiguration {
         return ds;
     }
 
-    //pool de conexoes
+    // pool de conexoes
     @Bean
     public DataSource hikariDataSource() {
         HikariConfig config = new HikariConfig();
@@ -45,11 +45,11 @@ public class DatabaseConfiguration {
         config.setDriverClassName(driver);
         config.setJdbcUrl(url);
 
-        config.setMaximumPoolSize(10);//maximo de conexões
-        config.setMinimumIdle(1);//tamanho inicial do pool
+        config.setMaximumPoolSize(10);// maximo de conexões
+        config.setMinimumIdle(1);// tamanho inicial do pool
         config.setPoolName("library-db-pool");
-        config.setMaxLifetime(600000);//tamanho maximo de uma conexão(10m)
-        config.setConnectionTimeout(100000);//tempo para conseguir uma conexão
+        config.setMaxLifetime(6000000);// tamanho maximo de uma conexão(10m)
+        config.setConnectionTimeout(100000);// tempo para conseguir uma conexão
         config.setConnectionTestQuery("select 1");// query de teste
 
         return new HikariDataSource(config);
